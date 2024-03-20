@@ -10,14 +10,19 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-        I'm Luki Zainur (he/him), a Taiwanese American gal studying Computer Engineering and Computer Science at the University of Southern California. I'm a journalist, designer, and engineer interested in how the world works so I can make it better. Welcome, and I hope you enjoy your stay!
+    <main>
+		<div class="p-5 my-5 container mx-auto">
+			<h1 text="4xl center"> 🛸 Hello, Human!</h1>
+			<p class="text-xl">
+        I'm Luki Zainur(he/him), an Full-Stack from East Java. I'm really into programming and design because I want to create something useful for people. Welcome, hope you enjoy your stay!
 			</p>
-		</main>
+      <div class="flex justify-center items-center p-3">
+          <a href="https://github.com/lzif" class="rounded-full p-2 bg-white text-4xl"><div class="i-logos-github-icon"/></a>
+      </div>
+		</div>
+    </main>
 		<Footer />
 	</body>
 </html>
