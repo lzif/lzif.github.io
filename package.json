@@ -23,8 +23,6 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
-    "@unocss/reset": "^0.58.6",
-    "astro-themes": "^0.2.5",
-    "unocss": "^0.58.6"
+    "astro-themes": "^0.2.5"
   }
 }
