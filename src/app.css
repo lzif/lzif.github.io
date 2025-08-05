@@ -7,26 +7,26 @@ html {
 	--font-mono: 'JetBrains Mono', monospace;
 
 	/* dark */
-	--brand-dark: var(--orange-3);
-	--text-1-dark: var(--gray-3);
-	--text-2-dark: var(--gray-5);
-	--surface-1-dark: var(--gray-12);
-	--surface-2-dark: var(--gray-11);
-	--surface-3-dark: var(--gray-10);
-	--surface-4-dark: var(--gray-9);
-	--background-dark: var(--gradient-8);
-	--border-dark: var(--gray-9);
+	--brand-dark: #FFD166;
+	--text-1-dark: #E0E0E0;
+	--text-2-dark: #A0A0A0;
+	--surface-1-dark: #121212;
+	--surface-2-dark: #1E1E1E;
+	--surface-3-dark: #282828;
+	--surface-4-dark: #333333;
+	--background-dark: linear-gradient(to bottom, #1E1E1E, #121212);
+	--border-dark: #444444;
 
 	/* light */
-	--brand-light: var(--orange-10);
-	--text-1-light: var(--gray-8);
-	--text-2-light: var(--gray-7);
-	--surface-1-light: var(--gray-0);
-	--surface-2-light: var(--gray-1);
-	--surface-3-light: var(--gray-2);
-	--surface-4-light: var(--gray-3);
+	--brand-light: #FF6F61;
+	--text-1-light: #333333;
+	--text-2-light: #777777;
+	--surface-1-light: #FFFFFF;
+	--surface-2-light: #F5F5F5;
+	--surface-3-light: #EEEEEE;
+	--surface-4-light: #E0E0E0;
 	--background-light: none;
-	--border-light: var(--gray-4);
+	--border-light: #DDDDDD;
 }
 
 :root {
