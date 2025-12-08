@@ -1,16 +1,16 @@
 <script lang="ts">
-import Footer from './footer.svelte'
-	import Header from './header.svelte'
-  import PageTransition from './transition.svelte'
+  import Footer from "./footer.svelte";
+  import Header from "./header.svelte";
+  import PageTransition from "./transition.svelte";
 
   import "open-props/style";
   import "open-props/normalize";
   import "open-props/buttons";
 
   import "../app.css";
-    import type { LayoutData } from './$types';
+  import type { LayoutData } from "./$types";
 
-  export let data: LayoutData
+  export let data: LayoutData;
 </script>
 
 <!-- div class="bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
@@ -40,30 +40,30 @@ import Footer from './footer.svelte'
 
 <div class="layout">
   <!-- Header -->
-	<Header />
+  <Header />
 
-	<main>
-		<!-- Black hole for other content -->
-		<PageTransition url={data.url}>
-			<slot />
-		</PageTransition>
-	</main>
+  <main>
+    <!-- Black hole for other content -->
+    <PageTransition url={data.url}>
+      <slot />
+    </PageTransition>
+  </main>
 
   <!-- Footer -->
-	<Footer />
+  <Footer />
 </div>
 
 <style>
-	.layout {
-		height: 100%;
-		max-inline-size: 1440px;
-		display: grid;
-		grid-template-rows: auto 1fr auto;
-		margin-inline: auto;
-		padding-inline: var(--size-fluid-7);
-	}
+  .layout {
+    height: 100%;
+    max-inline-size: 1440px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    margin-inline: auto;
+    padding-inline: var(--size-fluid-7);
+  }
 
-	main {
-		padding-block: var(--size-9);
-	}
+  main {
+    padding-block: var(--size-9);
+  }
 </style>

@@ -1,18 +1,17 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
+  import { fade } from "svelte/transition";
 
-	export let url: string
+  export let url: string;
 </script>
 
 {#key url}
-	<div class="transition" in:fade>
-		<slot />
-	</div>
+  <div class="transition" in:fade>
+    <slot />
+  </div>
 {/key}
 
 <style>
-	.transition {
-		height: 100%;
-	}
+  .transition {
+    height: 100%;
+  }
 </style>
-
