@@ -10,14 +10,12 @@ import Hello from "$lib/components/Hello.svelte"
 	<title>{config.title}</title>
 </svelte:head>
 
-<div class="container px-5 py-30 mx-auto">
-  <div class="flex items-center">
-    <h1 class="text-6xl font-black text-center text-sky-500 mr-3">
-      Hello, World!!
-    </h1>
+<div class="container">
+  <div class="intro-grid">
+    <h1>Hello, World!!</h1>
     <Hello/>
   </div>
-  <p class="text-2xl">
+  <p>
     I'm Luki Zainur(he/him), an Full-Stack Dev from East Java. I'm really into
     programming and design. Welcome, hope you enjoy your stay!
   </p>
@@ -61,5 +59,35 @@ import Hello from "$lib/components/Hello.svelte"
 
 .description {
 		margin-top: var(--size-3);
+	}
+
+	.container {
+		padding-block: var(--size-9);
+	}
+
+	.intro-grid {
+		display: flex;
+		align-items: center;
+		gap: var(--size-3);
+	}
+
+	h1 {
+		font-size: var(--font-size-fluid-3);
+		font-weight: var(--font-weight-9);
+		color: var(--brand);
+	}
+
+	p {
+		font-size: var(--font-size-fluid-1);
+	}
+
+	@media (max-width: 768px) {
+		.intro-grid {
+			flex-direction: column;
+		}
+
+		h1 {
+			text-align: center;
+		}
 	}
 </style>
