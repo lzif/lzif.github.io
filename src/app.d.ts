@@ -11,9 +11,9 @@ declare global {
 }
 
 declare namespace svelteHTML {
-  import type { AttributifyAttributes } from '@unocss/preset-attributify'
+  import type { AttributifyAttributes } from "@unocss/preset-attributify";
 
-  type HTMLAttributes = AttributifyAttributes
+  type HTMLAttributes = AttributifyAttributes;
 }
 
 export {};
