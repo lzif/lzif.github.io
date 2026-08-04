@@ -1,33 +1,21 @@
-<script>
-  import { page } from "$app/stores";
+<script lang="ts">
+  import { page } from "$app/state";
+  import { dev } from "$app/environment";
 
-  // we don't want to use <svelte:window bind:online> here, because we only care about the online
-  // state when the page first loads
-  let online = typeof navigator !== "undefined" ? navigator.onLine : true;
+  let message = $derived(page.error?.message ?? "Something went wrong");
 </script>
 
 <svelte:head>
-  <title>{$page.status}</title>
+  <title>{page.status} — Luki Zainur</title>
 </svelte:head>
 
-<div class="container">
-  {#if $page.status === 404}
-    <div class="w-full text-center my-30">
-      <h1 class="text-8xl font-black">Page Not found!</h1>
-      <p class="text-2xl">Maybe it hasn't been made yet.</p>
-      <p class="mt-5"><a href="/" class="text-xl">{"👈"} Go Back!</a></p>
-    </div>
-  {:else if online}
-    <h1>Yikes!</h1>
-
-    {#if $page.error?.message}
-      <p class="error">{$page.status}: {$page.error?.message}</p>
-    {/if}
-
-    <p>Please try reloading the page.</p>
-  {:else}
-    <h1>It looks like you're offline</h1>
-
-    <p>Reload the page once you've found the internet.</p>
+<div class="mx-auto flex min-h-[60vh] max-w-6xl flex-col items-center justify-center px-6 text-center">
+  <p class="font-mono text-sm uppercase tracking-[0.2em] text-accent">{page.status}</p>
+  <h1 class="mt-4 font-display text-6xl font-medium sm:text-7xl">Lost in the whitespace</h1>
+  {#if dev}
+    <p class="mt-4 max-w-prose text-muted">{message}</p>
   {/if}
+  <a href="/" class="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm text-black transition-all duration-300 hover:-translate-y-0.5">
+    Back home
+  </a>
 </div>

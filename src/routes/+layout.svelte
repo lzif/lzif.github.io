@@ -1,33 +1,41 @@
 <script lang="ts">
-  import "../app.css";
+  import Nav from "$lib/components/Nav.svelte";
+  import Footer from "$lib/components/Footer.svelte";
+  import { onNavigate } from "$app/navigation";
+  import { site } from "$lib/config";
+  import { profile } from "$lib/data/profile";
 
   let { children } = $props();
+
+  onNavigate(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce && "startViewTransition" in document) {
+      return new Promise((resolve) => {
+        document.startViewTransition(() => resolve());
+      });
+    }
+  });
 </script>
 
 <svelte:head>
-  <title>Luki Zainur</title>
+  <title>{site.name}</title>
+  <meta name="description" content={site.description} />
+  <link rel="canonical" href={site.url} />
+  <meta property="og:site_name" content={site.name} />
+  <meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
-<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-3 focus:text-accent">Skip to content</a>
+<a
+  href="#main"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-black"
+>
+  Skip to content
+</a>
 
-<header class="border-b border-line">
-  <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-    <a href="/" class="font-mono text-sm tracking-tight">luki</a>
-    <nav class="hidden gap-8 text-sm sm:flex">
-      <a href="/projects" class="text-muted transition-colors hover:text-fg">Projects</a>
-      <a href="/blog" class="text-muted transition-colors hover:text-fg">Blog</a>
-      <a href="/about" class="text-muted transition-colors hover:text-fg">About</a>
-      <a href="/contact" class="text-muted transition-colors hover:text-fg">Contact</a>
-    </nav>
-  </div>
-</header>
+<Nav />
 
-<main id="main">
+<main id="main" class="pt-16">
   {@render children()}
 </main>
 
-<footer class="border-t border-line">
-  <div class="mx-auto max-w-6xl px-6 py-8 text-center font-mono text-xs text-muted">
-    © {new Date().getFullYear()} Luki Zainur
-  </div>
-</footer>
+<Footer />
