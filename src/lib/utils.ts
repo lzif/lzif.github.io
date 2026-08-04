@@ -1,12 +1,11 @@
-type DateStyle = Intl.DateTimeFormatOptions["dateStyle"];
+export function formatDate(date: string): string {
+  return new Date(date + "T00:00:00").toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
 
-export function formatDate(
-  date: string,
-  dateStyle: DateStyle = "medium",
-  locales = "en",
-) {
-  // Safari is mad about dashes in the date
-  const dateToFormat = new Date(date.replaceAll("-", "/"));
-  const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle });
-  return dateFormatter.format(dateToFormat);
+export function cx(...classes: Array<string | false | null | undefined>): string {
+  return classes.filter(Boolean).join(" ");
 }

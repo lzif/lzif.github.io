@@ -1,5 +1,7 @@
-import { dev } from "$app/environment";
+import type { SiteConfig } from "$lib/types";
 
-export const title = "Shakespeare";
-export const description = "SvelteKit blog for poets";
-export const url = dev ? "http://localhost:5173/" : "https://joyofcode.xyz/";
+export const site: SiteConfig = {
+  name: "Luki Zainur",
+  url: "https://luki.is-a.dev",
+  description: "Full-stack developer crafting thoughtful software and interfaces.",
+};
