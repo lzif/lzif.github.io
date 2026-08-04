@@ -1,5 +1,6 @@
 import adapter from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import path from "node:path";
 
 import { mdsvex, escapeSvelte } from "mdsvex";
 import { getHighlighter } from "shiki";
@@ -8,7 +9,7 @@ import { getHighlighter } from "shiki";
 const mdsvexOptions = {
   extensions: [".md"],
   layout: {
-    _: "./src/mdsvex.svelte",
+    _: path.resolve(process.cwd(), "src/mdsvex.svelte"),
   },
   highlight: {
     highlighter: async (code, lang = "text") => {
@@ -34,6 +35,12 @@ const config = {
     adapter: adapter({
       fallback: "404.html",
     }),
+    prerender: {
+      handleHttpError: "warn",
+    },
+    paths: {
+      base: process.env.BASE_PATH ?? "",
+    },
   },
 };
 
