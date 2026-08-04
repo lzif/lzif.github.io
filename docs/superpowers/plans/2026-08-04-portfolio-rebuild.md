@@ -231,6 +231,8 @@ git commit -m "chore: migrate to svelte 5, tailwind v4, static base path"
 
 - [ ] **Step 1: Write the complete `src/app.css`**
 
+IMPORTANT (plan amendment from Task 1 review): the current `+layout.svelte` does NOT import `app.css`, so the build ships zero CSS. In this task, also add `import "../app.css";` to the top of `src/routes/+layout.svelte`'s script — without it, all Tailwind utilities (and the tokens from this file) are dead in the production build.
+
 ```css
 @import "tailwindcss";
 
@@ -2612,11 +2614,15 @@ Expected: no matches. Remove any stragglers. Verify `src/app.d.ts` content — i
 
 - [ ] **Step 4: Full verification**
 
+Plan amendment (from Task 1 review): revert the temporary `prerender: { handleHttpError: "warn" }` back to strict (remove the option entirely — the default is fail) BEFORE building, now that all routes exist.
+
 Run each and confirm:
 
 ```bash
 pnpm check                          # 0 errors
-pnpm build                          # succeeds, all routes prerendered
+pnpm build                          # succeeds with NO warnings, all routes prerendered
+# stylesheet presence check (from Task 1 review): the build must ship CSS
+find build/_app -name "*.css" | grep -q . && echo "CSS PRESENT" || echo "CSS MISSING"   # expect CSS PRESENT
 BASE_PATH="/lzif.github.io" pnpm build && git stash list --quiet || true   # base-path build also succeeds (re-run plain build after)
 pnpm preview &
 curl -s -o /dev/null -w "%{http_code}" http://localhost:4173/                    # 200
