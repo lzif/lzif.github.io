@@ -1339,6 +1339,7 @@ Full shell with view transitions, skip link, structured layout:
 
 ```svelte
 <script lang="ts">
+  import "../app.css";   // REQUIRED — Tailwind/tokens entry point; Task 5 review: build ships zero CSS without it
   import Nav from "$lib/components/Nav.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import { onNavigate } from "$app/navigation";
