@@ -31,7 +31,8 @@
     jobTitle: profile.title,
     url: site.url,
     email: "mailto:" + profile.email,
-  });
+  }, null, 2);
+  const personJsonLdTag = '<script type="application/ld+json">' + personJsonLd + '</scr' + 'ipt>';
 </script>
 
 <svelte:window onscroll={handleScroll} />
@@ -48,9 +49,7 @@
   <meta name="twitter:title" content={`${profile.name} — ${profile.title}`} />
   <meta name="twitter:description" content={profile.bio} />
   <meta name="twitter:image" content="{site.url}/og.png" />
-  <script type="application/ld+json">
-    {@html personJsonLd}
-  </script>
+  {@html personJsonLdTag}
 </svelte:head>
 
 <!-- hero -->
@@ -86,7 +85,7 @@
     <Reveal delay={320}>
       <dl class="mt-20 grid grid-cols-3 gap-6 border-t border-line pt-8 sm:max-w-xl">
         {#each profile.stats as stat, i (stat.label)}
-          <div>
+          <div class="flex flex-col">
             <dt class="order-2 mt-1 font-mono text-xs text-muted">{stat.label}</dt>
             <dd class="order-1 font-display text-3xl text-fg">
               <Counter value={stat.value} suffix={stat.suffix ?? ""} delay={i * 120} />
@@ -179,14 +178,14 @@
     </Reveal>
     <ol class="mt-14 max-w-3xl">
       {#each experience as entry, i (entry.year + entry.title)}
-        <Reveal delay={i * 80} class="group">
-          <li class="relative border-l border-line pl-8 pb-12 last:pb-0">
+        <li class="relative border-l border-line pb-12 pl-8 last:pb-0">
+          <Reveal delay={i * 80} class="group">
             <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150"></span>
             <p class="font-mono text-xs text-muted">{entry.year}</p>
             <h3 class="mt-2 font-display text-xl font-medium">{entry.title}</h3>
             <p class="mt-2 text-sm leading-relaxed text-muted">{entry.description}</p>
-          </li>
-        </Reveal>
+          </Reveal>
+        </li>
       {/each}
     </ol>
   </div>

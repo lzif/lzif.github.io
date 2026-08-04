@@ -10,6 +10,10 @@
   function start() {
     if (started) return;
     started = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      shown = value;
+      return;
+    }
     const tween = tweened(0, { duration: 900, delay, easing: cubicOut });
     tween.subscribe((v) => (shown = Math.round(v)));
     tween.set(value);
