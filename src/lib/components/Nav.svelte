@@ -7,6 +7,7 @@
   let scrolled = $state(false);
   let open = $state(false);
   let menuButton: HTMLButtonElement | undefined = $state();
+  let closeButton: HTMLButtonElement | undefined = $state();
 
   function handleScroll() {
     scrolled = window.scrollY > 4;
@@ -14,10 +15,13 @@
 
   function openMenu() {
     open = true;
+    document.documentElement.style.overflow = "hidden";
+    requestAnimationFrame(() => closeButton?.focus());
   }
 
   function closeMenu() {
     open = false;
+    document.documentElement.style.overflow = "";
     menuButton?.focus();
   }
 
@@ -101,7 +105,13 @@
       <a href="/" class="font-display text-lg tracking-tight" onclick={closeMenu}>
         {profile.name.split(" ")[0].toLowerCase()}<span class="text-accent">.</span>
       </a>
-      <button type="button" onclick={closeMenu} aria-label="Close menu" class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-fg">
+      <button
+        bind:this={closeButton}
+        type="button"
+        onclick={closeMenu}
+        aria-label="Close menu"
+        class="flex h-10 w-10 items-center justify-center rounded-full border border-line text-fg"
+      >
         <Icon name="close" size={16} />
       </button>
     </div>

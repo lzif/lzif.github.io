@@ -6,6 +6,7 @@ export function applyTheme(theme: Theme): void {
   if (!browser) return;
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
+  window.dispatchEvent(new Event("themechange"));
 }
 
 export function getTheme(): Theme {

@@ -18,6 +18,8 @@
   }
 </script>
 
+<svelte:window onthemechange={() => (theme = getTheme())} />
+
 <button
   type="button"
   onclick={handleClick}

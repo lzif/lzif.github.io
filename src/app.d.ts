@@ -16,4 +16,13 @@ declare namespace svelteHTML {
   type HTMLAttributes = AttributifyAttributes;
 }
 
+// Custom window event dispatched by `applyTheme` so multiple
+// ThemeToggle instances (desktop + mobile) stay in sync.
+declare module "svelte/elements" {
+  interface SvelteWindowAttributes {
+    onthemechange?: (event: Event) => void;
+    "on:themechange"?: (event: Event) => void;
+  }
+}
+
 export {};
