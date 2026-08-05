@@ -1,10 +1,13 @@
 <script lang="ts">
   import { profile } from "$lib/data/profile";
   import { site } from "$lib/config";
+  import { socials } from "$lib/data/socials";
   import Reveal from "$lib/components/Reveal.svelte";
   import Icon from "$lib/components/Icon.svelte";
   import CTA from "$lib/components/CTA.svelte";
   import SocialLinks from "$lib/components/SocialLinks.svelte";
+
+  const gh = socials.find((s) => s.label === "GitHub")!;
 </script>
 
 <svelte:head>
@@ -39,14 +42,14 @@
     </Reveal>
     <Reveal delay={100}>
       <a
-        href="https://github.com/lzif"
+        href={gh.href}
         target="_blank"
         rel="noopener noreferrer"
         class="group block rounded-2xl border border-line p-8 transition-colors duration-300 hover:border-accent"
       >
         <Icon name="github" size={20} class="text-accent" />
         <p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-muted">GitHub</p>
-        <p class="mt-2 font-display text-2xl transition-colors group-hover:text-accent">lzif</p>
+        <p class="mt-2 font-display text-2xl transition-colors group-hover:text-accent">{gh.href.split("/").pop()}</p>
       </a>
     </Reveal>
   </div>

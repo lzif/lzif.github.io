@@ -17,7 +17,7 @@
   rel={external ? "noopener noreferrer" : undefined}
   class={cx(
     "group inline-flex items-center gap-2 rounded-full px-6 py-3 font-mono text-sm transition-all duration-300 ease-overshoot",
-    variant === "primary" && "bg-accent text-black hover:-translate-y-0.5 hover:bg-fg hover:text-bg",
+    variant === "primary" && "bg-accent text-bg hover:-translate-y-0.5 hover:bg-fg hover:text-bg",
     variant === "ghost" && "border border-line text-fg hover:-translate-y-0.5 hover:border-accent hover:text-accent",
     className,
   )}
