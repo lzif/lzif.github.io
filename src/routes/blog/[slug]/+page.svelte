@@ -7,6 +7,22 @@
 
   const meta = $derived(data.meta);
   const Content = $derived(data.content);
+
+  // Must be emitted as ONE {@html} of the entire <script> element. Putting {@html}
+  // *inside* a literal <script> tag does not compile — it renders as literal text.
+  const jsonLdTag = $derived(
+    `<script type="application/ld+json">` +
+      JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: meta.title,
+        description: meta.description,
+        datePublished: meta.date,
+        url: `${site.url}/blog/${meta.slug}`,
+        author: { "@type": "Person", name: site.name },
+      }).replace(/</g, "\\u003c") +
+      `<\/script>`,
+  );
 </script>
 
 <svelte:head>
@@ -19,6 +35,7 @@
   <meta property="og:url" content={`${site.url}/blog/${meta.slug}`} />
   <meta name="twitter:title" content={meta.title} />
   <meta name="twitter:description" content={meta.description} />
+  {@html jsonLdTag}
 </svelte:head>
 
 <article class="mx-auto max-w-3xl px-6 pb-24 pt-16 sm:pt-24">
@@ -34,7 +51,7 @@
   <p class="mt-4 font-mono text-xs text-muted">
     <time datetime={meta.date}>{formatDate(meta.date)}</time>
   </p>
-  {#if meta.categories.length > 0}
+  {#if meta.categories?.length}
     <ul class="mt-6 flex flex-wrap gap-2">
       {#each meta.categories as category (category)}
         <li class="rounded-full border border-line px-3 py-1 font-mono text-xs text-muted">

@@ -6,18 +6,26 @@ import type { PageLoad } from "./$types";
 
 export const prerender = true;
 
-const modules = import.meta.glob("/src/posts/*.md", { eager: true }) as Record<
+/**
+ * Deliberately NOT eager. An eager glob pulls every post's rendered body into one
+ * unsplittable client chunk, so unpublished drafts would ship to the public bundle
+ * regardless of the `published` filter. Lazy loaders keep each post in its own
+ * chunk, fetched only for the slug actually being rendered.
+ */
+const modules = import.meta.glob("/src/posts/*.md") as Record<
   string,
-  { default: Component }
+  () => Promise<{ default: Component }>
 >;
 
 export function entries(): { slug: string }[] {
   return getPosts().map((post) => ({ slug: post.slug }));
 }
 
-export const load: PageLoad = ({ params }): { content: Component; meta: Post } => {
+export const load: PageLoad = async ({ params }): Promise<{ content: Component; meta: Post }> => {
   const meta = getPosts().find((post) => post.slug === params.slug);
   const path = Object.keys(modules).find((p) => p.endsWith(`/${params.slug}.md`));
   if (!meta || !path) error(404, "Post not found");
-  return { content: modules[path].default, meta };
+
+  const module = await modules[path]();
+  return { content: module.default, meta };
 };
