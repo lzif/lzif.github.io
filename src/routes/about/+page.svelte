@@ -40,12 +40,12 @@
     <Reveal delay={100}>
       <div>
         <p class="font-mono text-xs uppercase tracking-[0.2em] text-accent">Philosophy</p>
-        <div class="prose mt-6 space-y-6 text-muted">
-          <p class="text-lg leading-relaxed">
+        <div class="prose mt-6">
+          <p class="text-lg leading-relaxed text-muted">
             I believe good software is felt, not noticed. Interfaces should be quiet, fast, and
             forgiving — the craft shows in the details that don't call attention to themselves.
           </p>
-          <p class="text-lg leading-relaxed">
+          <p class="text-lg leading-relaxed text-muted">
             I'd rather ship a small, honest tool than a sprawling platform. Most of my projects
             start from a personal itch and stay lean on purpose.
           </p>

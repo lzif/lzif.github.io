@@ -4,10 +4,9 @@
   import { socials } from "$lib/data/socials";
   import Reveal from "$lib/components/Reveal.svelte";
   import Icon from "$lib/components/Icon.svelte";
-  import CTA from "$lib/components/CTA.svelte";
   import SocialLinks from "$lib/components/SocialLinks.svelte";
 
-  const gh = socials.find((s) => s.label === "GitHub")!;
+  const gh = socials.find((s) => s.icon === "github");
 </script>
 
 <svelte:head>
@@ -40,18 +39,20 @@
         <p class="mt-2 font-display text-2xl break-all transition-colors group-hover:text-accent">{profile.email}</p>
       </a>
     </Reveal>
-    <Reveal delay={100}>
-      <a
-        href={gh.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="group block rounded-2xl border border-line p-8 transition-colors duration-300 hover:border-accent"
-      >
-        <Icon name="github" size={20} class="text-accent" />
-        <p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-muted">GitHub</p>
-        <p class="mt-2 font-display text-2xl transition-colors group-hover:text-accent">{gh.href.split("/").pop()}</p>
-      </a>
-    </Reveal>
+    {#if gh}
+      <Reveal delay={100}>
+        <a
+          href={gh.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group block rounded-2xl border border-line p-8 transition-colors duration-300 hover:border-accent"
+        >
+          <Icon name="github" size={20} class="text-accent" />
+          <p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-muted">GitHub</p>
+          <p class="mt-2 font-display text-2xl transition-colors group-hover:text-accent">{gh.handle}</p>
+        </a>
+      </Reveal>
+    {/if}
   </div>
 
   <Reveal delay={160}>

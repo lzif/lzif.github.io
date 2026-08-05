@@ -32,7 +32,7 @@ export type Profile = {
   stats: { value: number; label: string; suffix?: string }[];
 };
 
-export type Social = { label: string; href: string; icon: "github" | "mail" | "external" };
+export type Social = { label: string; href: string; icon: "github" | "mail" | "external"; handle?: string };
 
 export type Post = {
   title: string;

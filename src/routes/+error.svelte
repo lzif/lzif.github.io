@@ -15,7 +15,7 @@
   {#if dev}
     <p class="mt-4 max-w-prose text-muted">{message}</p>
   {/if}
-  <a href="/" class="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm text-black transition-all duration-300 hover:-translate-y-0.5">
+  <a href="/" class="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-mono text-sm text-bg transition-all duration-300 hover:-translate-y-0.5">
     Back home
   </a>
 </div>
