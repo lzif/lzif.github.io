@@ -32,12 +32,12 @@
   </Reveal>
 
   <Reveal delay={120}>
-    <Picture src={project.cover} alt={`${project.title} cover`} width={1200} height={900} class="mt-12 aspect-[4/3] w-full" priority />
+    <Picture src={project.cover} alt={`${project.title} cover`} width={1200} height={900} class="mt-12 aspect-[4/3] w-full" sizes="(max-width: 896px) 100vw, 896px" priority />
   </Reveal>
 
   <Reveal delay={160}>
     <div class="prose mt-12">
-      {#each project.description as paragraph (paragraph)}
+      {#each project.description as paragraph}
         <p class="text-lg leading-relaxed text-muted">{paragraph}</p>
       {/each}
     </div>
