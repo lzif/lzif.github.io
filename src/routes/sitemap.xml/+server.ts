@@ -10,10 +10,16 @@ const staticRoutes = ["", "/projects", "/blog", "/about", "/contact"];
 export function GET(): Response {
   const projectRoutes = projects.map((p) => `/projects/${p.slug}`);
   const postRoutes = getPosts().map((p) => `/blog/${p.slug}`);
+  // Two distinct escapes, both required, in this order. `encodeURI` makes the string a
+  // *valid URL* — post slugs come from filenames, so "notes on rust.md" would otherwise
+  // emit a `<loc>` containing raw spaces, which Search Console rejects outright.
+  // `escapeXml` then makes that URL safe as *XML text*. Neither substitutes for the
+  // other: encodeURI leaves `&` alone (it is a legal URL character), and escapeXml
+  // leaves spaces alone.
   const urls = [...staticRoutes, ...projectRoutes, ...postRoutes]
     .map(
       (route) =>
-        `<url><loc>${escapeXml(`${site.url}${route}`)}</loc><changefreq>monthly</changefreq></url>`,
+        `<url><loc>${escapeXml(encodeURI(`${site.url}${route}`))}</loc><changefreq>monthly</changefreq></url>`,
     )
     .join("\n  ");
 

@@ -1,12 +1,13 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { dev } from "$app/environment";
+  import { site } from "$lib/config";
 
   let message = $derived(page.error?.message ?? "Something went wrong");
 </script>
 
 <svelte:head>
-  <title>{page.status} — Luki Zainur</title>
+  <title>{page.status} — {site.name}</title>
 </svelte:head>
 
 <div class="mx-auto flex min-h-[60vh] max-w-6xl flex-col items-center justify-center px-6 text-center">

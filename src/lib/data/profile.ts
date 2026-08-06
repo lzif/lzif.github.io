@@ -16,6 +16,6 @@ export const profile: Profile = {
   stats: [
     { value: 5, label: "Years of tinkering" },
     { value: 30, label: "Repositories shipped" },
-    { value: 8, label: "Featured projects" },
+    { value: 8, label: "Curated projects" },
   ],
 };

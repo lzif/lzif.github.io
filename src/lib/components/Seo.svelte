@@ -17,8 +17,13 @@
     jsonLd?: Record<string, unknown>;
   } = $props();
 
-  let canonical = $derived(`${site.url}${path}`);
-  let ogImage = $derived(`${site.url}${image}`);
+  // `path` is built from route params (post/project slugs, which come from filenames),
+  // so it can legitimately contain characters that are invalid in a URL — a space in
+  // particular. A canonical/og:url carrying a raw space is ignored by crawlers, so
+  // encode before emitting. Attribute values are escaped by Svelte itself, so unlike
+  // the sitemap no XML escaping is needed on top.
+  let canonical = $derived(encodeURI(`${site.url}${path}`));
+  let ogImage = $derived(encodeURI(`${site.url}${image}`));
 
   // Must be emitted as ONE {@html} of the entire <script> element. Putting {@html}
   // *inside* a literal <script> tag does not compile — it renders as literal text.

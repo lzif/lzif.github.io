@@ -85,7 +85,14 @@ function stripUnpublishedPosts(): Plugin {
         );
       }
 
-      const published = /^published:\s*(true|false)\s*(?:#.*)?\s*$/.exec(candidates[0]!);
+      // The `#` must be preceded by whitespace. YAML only starts a comment at a `#`
+      // that follows whitespace (or begins the line); in `published: false#wip` the
+      // value is the plain scalar string "false#wip", NOT the boolean false. Accepting
+      // a bare `#` here would classify that string as canonical `false` and silently
+      // stub the post — quiet, wrong, and a divergence from `isPublished()`, which
+      // parses real YAML and would see a string. Under this plugin's contract every
+      // non-canonical shape is a named build failure, so require the whitespace.
+      const published = /^published:\s*(true|false)(?:\s+#.*)?\s*$/.exec(candidates[0]!);
       if (!published) {
         return fail(
           `This file's value does not match either canonical shape, so it cannot be safely ` +

@@ -76,7 +76,7 @@ export const projects: Project[] = [
     tags: ["Web", "Tool"],
     cover: "/covers/imphnen-skor-1200.webp",
     github: "https://github.com/lzif/imphnen-skor",
-    demo: "http://luki.is-a.dev/imphnen-skor/",
+    demo: "https://luki.is-a.dev/imphnen-skor/",
     featured: false,
   },
   {
