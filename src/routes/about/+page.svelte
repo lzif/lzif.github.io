@@ -7,15 +7,14 @@
   import SkillBadge from "$lib/components/SkillBadge.svelte";
   import CTA from "$lib/components/CTA.svelte";
   import Icon from "$lib/components/Icon.svelte";
+  import Seo from "$lib/components/Seo.svelte";
 </script>
 
-<svelte:head>
-  <title>About — {site.name}</title>
-  <meta name="description" content={`About ${profile.name}: ${profile.title} based in ${profile.location}.`} />
-  <link rel="canonical" href={`${site.url}/about`} />
-  <meta property="og:title" content={`About — ${site.name}`} />
-  <meta property="og:url" content={`${site.url}/about`} />
-</svelte:head>
+<Seo
+  title={`About — ${site.name}`}
+  description={`About ${profile.name}: ${profile.title} based in ${profile.location}.`}
+  path="/about"
+/>
 
 <section class="mx-auto max-w-6xl px-6 pb-24 pt-16 sm:pt-24">
   <Reveal>

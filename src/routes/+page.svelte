@@ -12,6 +12,7 @@
   import Icon from "$lib/components/Icon.svelte";
   import Picture from "$lib/components/Picture.svelte";
   import Counter from "$lib/components/Counter.svelte";
+  import Seo from "$lib/components/Seo.svelte";
 
   let featured = $derived(projects.filter((p) => p.featured).slice(0, 3));
 
@@ -24,33 +25,19 @@
     }
   }
 
-  const personJsonLd = JSON.stringify({
+  const personLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: profile.name,
     jobTitle: profile.title,
     url: site.url,
     email: "mailto:" + profile.email,
-  }, null, 2);
-  const personJsonLdTag = '<script type="application/ld+json">' + personJsonLd + '</scr' + 'ipt>';
+  };
 </script>
 
 <svelte:window onscroll={handleScroll} />
 
-<svelte:head>
-  <title>{profile.name} — {profile.title}</title>
-  <meta name="description" content={profile.bio} />
-  <link rel="canonical" href={site.url} />
-  <meta property="og:title" content={`${profile.name} — ${profile.title}`} />
-  <meta property="og:description" content={profile.bio} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={site.url} />
-  <meta property="og:image" content="{site.url}/og.png" />
-  <meta name="twitter:title" content={`${profile.name} — ${profile.title}`} />
-  <meta name="twitter:description" content={profile.bio} />
-  <meta name="twitter:image" content="{site.url}/og.png" />
-  {@html personJsonLdTag}
-</svelte:head>
+<Seo title={`${profile.name} — ${profile.title}`} description={profile.bio} jsonLd={personLd} />
 
 <!-- hero -->
 <section class="relative overflow-hidden">

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { site } from "$lib/config";
   import { formatDate } from "$lib/utils";
+  import Seo from "$lib/components/Seo.svelte";
   import type { PageData } from "./$types";
 
   let { data }: { data: PageData } = $props();
@@ -8,35 +9,24 @@
   const meta = $derived(data.meta);
   const Content = $derived(data.content);
 
-  // Must be emitted as ONE {@html} of the entire <script> element. Putting {@html}
-  // *inside* a literal <script> tag does not compile — it renders as literal text.
-  const jsonLdTag = $derived(
-    `<script type="application/ld+json">` +
-      JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: meta.title,
-        description: meta.description,
-        datePublished: meta.date,
-        url: `${site.url}/blog/${meta.slug}`,
-        author: { "@type": "Person", name: site.name },
-      }).replace(/</g, "\\u003c") +
-      `<\/script>`,
-  );
+  const blogPostingLd = $derived({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: meta.title,
+    description: meta.description,
+    datePublished: meta.date,
+    url: `${site.url}/blog/${meta.slug}`,
+    author: { "@type": "Person", name: site.name },
+  });
 </script>
 
-<svelte:head>
-  <title>{meta.title} — {site.name}</title>
-  <meta name="description" content={meta.description} />
-  <link rel="canonical" href={`${site.url}/blog/${meta.slug}`} />
-  <meta property="og:title" content={meta.title} />
-  <meta property="og:description" content={meta.description} />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${site.url}/blog/${meta.slug}`} />
-  <meta name="twitter:title" content={meta.title} />
-  <meta name="twitter:description" content={meta.description} />
-  {@html jsonLdTag}
-</svelte:head>
+<Seo
+  title={`${meta.title} — ${site.name}`}
+  description={meta.description}
+  path={`/blog/${meta.slug}`}
+  type="article"
+  jsonLd={blogPostingLd}
+/>
 
 <article class="mx-auto max-w-3xl px-6 pb-24 pt-16 sm:pt-24">
   <a

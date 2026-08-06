@@ -4,6 +4,7 @@
   import Reveal from "$lib/components/Reveal.svelte";
   import SectionHeader from "$lib/components/SectionHeader.svelte";
   import Icon from "$lib/components/Icon.svelte";
+  import Seo from "$lib/components/Seo.svelte";
   import { site } from "$lib/config";
   import { projects } from "$lib/data/projects";
 
@@ -14,13 +15,11 @@
   let visible = $derived(active === "All" ? projects : projects.filter((p) => p.tags.includes(active)));
 </script>
 
-<svelte:head>
-  <title>Projects — {site.name}</title>
-  <meta name="description" content="A selection of projects I've built — frameworks, apps, and tools." />
-  <link rel="canonical" href={`${site.url}/projects`} />
-  <meta property="og:title" content={`Projects — ${site.name}`} />
-  <meta property="og:url" content={`${site.url}/projects`} />
-</svelte:head>
+<Seo
+  title={`Projects — ${site.name}`}
+  description="A selection of projects I've built — frameworks, apps, and tools."
+  path="/projects"
+/>
 
 <section class="mx-auto max-w-6xl px-6 pb-24 pt-16 sm:pt-24">
   <Reveal>

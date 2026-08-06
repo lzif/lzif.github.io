@@ -5,17 +5,12 @@
   import Reveal from "$lib/components/Reveal.svelte";
   import Icon from "$lib/components/Icon.svelte";
   import SocialLinks from "$lib/components/SocialLinks.svelte";
+  import Seo from "$lib/components/Seo.svelte";
 
   const gh = socials.find((s) => s.icon === "github");
 </script>
 
-<svelte:head>
-  <title>Contact — {site.name}</title>
-  <meta name="description" content={`Get in touch with ${profile.name}.`} />
-  <link rel="canonical" href={`${site.url}/contact`} />
-  <meta property="og:title" content={`Contact — ${site.name}`} />
-  <meta property="og:url" content={`${site.url}/contact`} />
-</svelte:head>
+<Seo title={`Contact — ${site.name}`} description={`Get in touch with ${profile.name}.`} path="/contact" />
 
 <section class="mx-auto max-w-6xl px-6 pb-24 pt-16 sm:pt-24">
   <Reveal>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import Reveal from "$lib/components/Reveal.svelte";
   import SectionHeader from "$lib/components/SectionHeader.svelte";
+  import Seo from "$lib/components/Seo.svelte";
   import { site } from "$lib/config";
   import { formatDate } from "$lib/utils";
   import type { PageData } from "./$types";
@@ -8,14 +9,11 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<svelte:head>
-  <title>Blog — {site.name}</title>
-  <meta name="description" content="Notes on software, tools, and the craft of building." />
-  <link rel="canonical" href={`${site.url}/blog`} />
-  <meta property="og:title" content={`Blog — ${site.name}`} />
-  <meta property="og:description" content="Notes on software, tools, and the craft of building." />
-  <meta property="og:url" content={`${site.url}/blog`} />
-</svelte:head>
+<Seo
+  title={`Blog — ${site.name}`}
+  description="Notes on software, tools, and the craft of building."
+  path="/blog"
+/>
 
 <section class="mx-auto max-w-6xl px-6 pb-24 pt-16 sm:pt-24">
   <Reveal>

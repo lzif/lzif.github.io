@@ -4,25 +4,20 @@
   import CTA from "$lib/components/CTA.svelte";
   import Icon from "$lib/components/Icon.svelte";
   import Reveal from "$lib/components/Reveal.svelte";
+  import Seo from "$lib/components/Seo.svelte";
   import { site } from "$lib/config";
 
   let { data }: { data: PageData } = $props();
   let { project } = $derived(data);
 </script>
 
-<svelte:head>
-  <title>{project.title} — {site.name}</title>
-  <meta name="description" content={project.tagline} />
-  <link rel="canonical" href={`${site.url}/projects/${project.slug}`} />
-  <meta property="og:title" content={project.title} />
-  <meta property="og:description" content={project.tagline} />
-  <meta property="og:type" content="article" />
-  <meta property="og:url" content={`${site.url}/projects/${project.slug}`} />
-  <meta property="og:image" content={`${site.url}${project.cover}`} />
-  <meta name="twitter:title" content={project.title} />
-  <meta name="twitter:description" content={project.tagline} />
-  <meta name="twitter:image" content={`${site.url}${project.cover}`} />
-</svelte:head>
+<Seo
+  title={`${project.title} — ${site.name}`}
+  description={project.tagline}
+  path={`/projects/${project.slug}`}
+  type="article"
+  image={project.cover}
+/>
 
 <article class="mx-auto max-w-4xl px-6 pb-24 pt-16 sm:pt-24">
   <Reveal>

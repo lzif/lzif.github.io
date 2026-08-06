@@ -1,16 +1,8 @@
 import { site } from "$lib/config";
 import { getPosts } from "$lib/posts";
+import { escapeXml } from "$lib/utils";
 
 export const prerender = true;
-
-function escapeXml(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
 
 export function GET(): Response {
   const posts = getPosts();

@@ -4,8 +4,6 @@
   import Nav from "$lib/components/Nav.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import { onNavigate } from "$app/navigation";
-  import { site } from "$lib/config";
-  import { profile } from "$lib/data/profile";
 
   let { children } = $props();
 
@@ -18,14 +16,6 @@
     }
   });
 </script>
-
-<svelte:head>
-  <title>{site.name}</title>
-  <meta name="description" content={site.description} />
-  <link rel="canonical" href={site.url} />
-  <meta property="og:site_name" content={site.name} />
-  <meta name="twitter:card" content="summary_large_image" />
-</svelte:head>
 
 <a
   href="#main"
