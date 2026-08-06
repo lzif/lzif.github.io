@@ -1,14 +1,10 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
   import Picture from "$lib/components/Picture.svelte";
   import Reveal from "$lib/components/Reveal.svelte";
   import SectionHeader from "$lib/components/SectionHeader.svelte";
-  import Icon from "$lib/components/Icon.svelte";
   import Seo from "$lib/components/Seo.svelte";
   import { site } from "$lib/config";
   import { projects } from "$lib/data/projects";
-
-  let { data }: { data: PageData } = $props();
 
   let tags = $derived(["All", ...Array.from(new Set(projects.flatMap((p) => p.tags)))]);
   let active = $state("All");
@@ -54,7 +50,8 @@
     {#each visible as project (project.slug)}
       <Reveal>
         <a href={`/projects/${project.slug}`} class="group block" aria-label={`${project.title} — view project`}>
-          <Picture src={project.cover} alt={`${project.title} cover`} width={1200} height={900} class="aspect-[4/3] w-full transition-transform duration-700 ease-overshoot group-hover:scale-[1.02]" />
+          <!-- decorative: the generated covers carry no information, and the link already names the project -->
+          <Picture src={project.cover} alt="" width={1200} height={900} class="aspect-[4/3] w-full transition-transform duration-700 ease-overshoot group-hover:scale-[1.02]" />
           <div class="mt-5 flex items-baseline justify-between gap-4">
             <h3 class="font-display text-xl font-medium tracking-tight transition-colors duration-300 group-hover:text-accent">
               {project.title}

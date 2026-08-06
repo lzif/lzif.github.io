@@ -2,7 +2,6 @@
   import type { PageData } from "./$types";
   import Picture from "$lib/components/Picture.svelte";
   import CTA from "$lib/components/CTA.svelte";
-  import Icon from "$lib/components/Icon.svelte";
   import Reveal from "$lib/components/Reveal.svelte";
   import Seo from "$lib/components/Seo.svelte";
   import { site } from "$lib/config";
@@ -32,7 +31,7 @@
 
   <Reveal delay={160}>
     <div class="prose mt-12">
-      {#each project.description as paragraph}
+      {#each project.description as paragraph (paragraph)}
         <p class="text-lg leading-relaxed text-muted">{paragraph}</p>
       {/each}
     </div>

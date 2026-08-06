@@ -4,7 +4,10 @@
 
   let { value, suffix = "", delay = 0 }: { value: number; suffix?: string; delay?: number } = $props();
 
-  let shown = $state(0);
+  // Starts at the final value so the prerendered HTML states the real number for
+  // non-JS consumers; the browser rewinds to 0 before tweening.
+  // svelte-ignore state_referenced_locally
+  let shown = $state(value);
   let started = $state(false);
 
   function start() {
@@ -14,6 +17,7 @@
       shown = value;
       return;
     }
+    shown = 0;
     const tween = tweened(0, { duration: 900, delay, easing: cubicOut });
     tween.subscribe((v) => (shown = Math.round(v)));
     tween.set(value);

@@ -60,8 +60,11 @@
 
 <header
   class={cx(
-    "fixed inset-x-0 top-0 z-40 border-b bg-bg/80 backdrop-blur-md transition-shadow duration-300",
-    scrolled ? "shadow-[0_1px_0_0_var(--line)]" : "border-transparent",
+    // Tailwind v4 preflight sets border-style/width but no colour, so `currentColor`
+    // would stand: `border-transparent` has to be unconditional. Only the hairline
+    // shadow reacts to scrolling.
+    "fixed inset-x-0 top-0 z-40 border-b border-transparent bg-bg/80 backdrop-blur-md transition-shadow duration-300",
+    scrolled && "shadow-[0_1px_0_0_var(--line)]",
   )}
 >
   <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between px-6" aria-label="Main">

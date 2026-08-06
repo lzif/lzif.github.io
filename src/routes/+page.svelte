@@ -98,7 +98,8 @@
       {#each featured as project, i (project.slug)}
         <Reveal delay={i * 100} class={(i % 2 === 1 ? "md:mt-16 " : "") + "group"}>
           <a href={`/projects/${project.slug}`} class="group block" aria-label={`${project.title} — view project`}>
-            <Picture src={project.cover} alt={`${project.title} cover`} width={1200} height={900} class="aspect-[4/3] w-full transition-transform duration-700 ease-overshoot group-hover:scale-[1.02]" />
+            <!-- decorative: the generated covers carry no information, and the link already names the project -->
+            <Picture src={project.cover} alt="" width={1200} height={900} class="aspect-[4/3] w-full transition-transform duration-700 ease-overshoot group-hover:scale-[1.02]" />
             <div class="mt-5 flex items-baseline justify-between gap-4">
               <h3 class="font-display text-2xl font-medium tracking-tight transition-colors duration-300 group-hover:text-accent">
                 {project.title}
@@ -165,9 +166,12 @@
     </Reveal>
     <ol class="mt-14 max-w-3xl">
       {#each experience as entry, i (entry.year + entry.title)}
-        <li class="relative border-l border-line pb-12 pl-8 last:pb-0">
-          <Reveal delay={i * 80} class="group">
-            <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150"></span>
+        <!-- The dot must stay a direct child of the <li>: Reveal's `translate` makes
+             its <div> a containing block for absolutely positioned descendants, which
+             would push the dot onto the year label. `group` moves up with it. -->
+        <li class="group relative border-l border-line pb-12 pl-8 last:pb-0">
+          <span class="absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full bg-accent transition-transform duration-300 group-hover:scale-150"></span>
+          <Reveal delay={i * 80}>
             <p class="font-mono text-xs text-muted">{entry.year}</p>
             <h3 class="mt-2 font-display text-xl font-medium">{entry.title}</h3>
             <p class="mt-2 text-sm leading-relaxed text-muted">{entry.description}</p>

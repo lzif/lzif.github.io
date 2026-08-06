@@ -20,8 +20,8 @@ export function GET(): Response {
     <item>
       <title>${escapeXml(post.title)}</title>
       <description>${escapeXml(post.description)}</description>
-      <link>${escapeXml(`${site.url}/blog/${post.slug}`)}</link>
-      <guid isPermaLink="true">${escapeXml(`${site.url}/blog/${post.slug}`)}</guid>
+      <link>${escapeXml(encodeURI(`${site.url}/blog/${post.slug}`))}</link>
+      <guid isPermaLink="true">${escapeXml(encodeURI(`${site.url}/blog/${post.slug}`))}</guid>
       <pubDate>${new Date(`${post.date}T00:00:00Z`).toUTCString()}</pubDate>
     </item>`,
       )

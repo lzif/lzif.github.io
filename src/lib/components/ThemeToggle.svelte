@@ -4,16 +4,19 @@
 
   let theme = $state<Theme>(getTheme());
 
+  function apply() {
+    toggleTheme();
+    theme = getTheme();
+  }
+
   function handleClick() {
-    const transition = (document as Document & { startViewTransition?: (cb: () => void) => void }).startViewTransition;
-    if (transition) {
-      transition(() => {
-        toggleTheme();
-        theme = getTheme();
-      });
+    // `startViewTransition` is a method on `document`; it must be called on it,
+    // otherwise the brand check fails with "Illegal invocation" and the callback
+    // never runs. Matches the call in `+layout.svelte`.
+    if ("startViewTransition" in document) {
+      document.startViewTransition(apply);
     } else {
-      toggleTheme();
-      theme = getTheme();
+      apply();
     }
   }
 </script>
