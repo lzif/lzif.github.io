@@ -40,7 +40,13 @@ function normalizeDate(value: unknown, slug: string): string {
   if (dateOnly) {
     const [, year, month, day] = dateOnly;
     const iso = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    if (Number.isNaN(new Date(`${iso}T00:00:00Z`).getTime())) {
+    // A NaN check alone is not enough: `new Date` rejects a bad month or a day > 31
+    // but silently ROLLS OVER a day that overflows its month, so "2026-02-31" parses
+    // as 2026-03-03 and this branch would return the impossible date verbatim — a
+    // wrong <time datetime>, a wrong RSS pubDate, and sorting under a date the post
+    // does not claim. Round-tripping through toISOString catches the overflow.
+    const parsedIso = new Date(`${iso}T00:00:00Z`);
+    if (Number.isNaN(parsedIso.getTime()) || parsedIso.toISOString().slice(0, 10) !== iso) {
       fail(slug, `"date" is not a real calendar date: "${raw}".`);
     }
     return iso;
