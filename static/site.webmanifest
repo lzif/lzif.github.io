@@ -1,6 +1,6 @@
 {
-  "name": "Luki Znr Personal Web",
-  "short_name": "LukiZnr",
+  "name": "Luki Zainur",
+  "short_name": "luki",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#2344ff",
-  "background_color": "#2f2f2f",
+  "theme_color": "#0A0908",
+  "background_color": "#0A0908",
   "display": "standalone"
 }

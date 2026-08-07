@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://luki.is-a.dev/sitemap.xml
